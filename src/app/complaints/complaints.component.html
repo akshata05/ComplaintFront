@@ -1,0 +1,37 @@
+
+<button class="btn btn-primary active" appShortKeys  [appKeys]="AddNew" (click)="AddNew()" >Create Ticket</button>
+<table class="table-bordered" >
+    <thead><tr class="table-success" >
+        <th>Ticket Id</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Status</th>
+
+        <th>Actions</th>
+    </tr></thead>
+    
+    <tbody>
+        <tr *ngFor="let complaint of complaints| paginate: { itemsPerPage: 10, currentPage: page} ;let i=index ">
+       
+            <td>{{complaint.id}}</td>
+            <td>{{complaint.title}}</td>
+            <td>{{complaint.description}}</td>
+            <td>{{complaint.status}}</td>
+              <td>
+               <span><i class="fas fa-edit fa-lg"style="color:#4C3F91;"  [id]="complaint.id" (click)="openModal($event)" ></i>
+               </span>
+               <span><button  > <img alt="delete ticket" src="assets/svg/delete.svg" [id]="complaint.id" (click)="openDialog($event)" /></button></span>
+                
+           
+            </td>
+    
+        </tr>
+
+</tbody>
+    
+</table>
+
+
+<pagination-controls (pageChange)="page = $event">
+</pagination-controls>
+

@@ -1,0 +1,32 @@
+
+
+<!-- Modal -->
+
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Delete Ticket</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="activeModal.close('close')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this ticket? id={{id}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="activeModal.close('close')">No</button>
+        <button type="button" class="btn btn-primary" (click)="Delete()">yes</button>
+      </div>
+    </div>
+  </div>
+  <ng-template *ngIf="stop">
+    <div class="spinner-grow text-primary text-center" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-secondary text-center" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text- text-center" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </ng-template>
