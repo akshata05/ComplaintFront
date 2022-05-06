@@ -29,6 +29,7 @@ const routes:Routes=[
 {path:"new",component:NewComplainComponent},
 {path:"escalated",component:EscalatedComplainComponent},
 {path:"resolved",component:ResolvedComplainComponent},
+{path:"404",component:NotfoundComponent},
 {path:"",redirectTo:"new",pathMatch:"full"}
 ]
 @NgModule({
