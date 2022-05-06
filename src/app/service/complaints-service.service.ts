@@ -24,6 +24,10 @@ return this.httpClient.post<Complaints>(this.baseUrl.concat("/add"),complaints);
     return this.httpClient.get<Complaints[]>(this.baseUrl.concat("/view"));
       
   }
+  GetComplainByStatus(status:string):Observable<Complaints[]>{
+    return this.httpClient.get<Complaints[]>(this.baseUrl.concat("/complains/")+status);
+      
+  }
   ViewOneComplaint(id:number):Observable<Complaints>{
     return this.httpClient.get<Complaints>(this.baseUrl.concat("/fetch/")+id);
   }

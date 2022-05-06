@@ -19,7 +19,18 @@ import { DeleteTicketComponent } from './delete-ticket/delete-ticket.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCommonModule } from '@angular/material/core';
 import { ShortKeysDirective } from './short-keys.directive';
+import { NewComplainComponent } from './Complains/new-complain/new-complain.component';
+import { EscalatedComplainComponent } from './Complains/escalated-complain/escalated-complain.component';
+import { ResolvedComplainComponent } from './Complains/resolved-complain/resolved-complain.component';
+import { Route, RouterModule, Routes } from '@angular/router';
+import { NotfoundComponent } from './notfound/notfound/notfound.component';
 
+const routes:Routes=[
+{path:"new",component:NewComplainComponent},
+{path:"escalated",component:EscalatedComplainComponent},
+{path:"resolved",component:ResolvedComplainComponent},
+{path:"",redirectTo:"new",pathMatch:"full"}
+]
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +42,11 @@ import { ShortKeysDirective } from './short-keys.directive';
     EditComplaintsComponent,
     AddComplaintsComponent,
     DeleteTicketComponent,
-    ShortKeysDirective
+    ShortKeysDirective,
+    NewComplainComponent,
+    EscalatedComplainComponent,
+    ResolvedComplainComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +59,8 @@ import { ShortKeysDirective } from './short-keys.directive';
     MatDialogModule,
 MatCommonModule,
 
-    NgxPaginationModule
+    NgxPaginationModule,
+    RouterModule.forRoot(routes)
    
   ],
   providers: [ComplaintsServiceService, NgbActiveModal,MatDialogModule],

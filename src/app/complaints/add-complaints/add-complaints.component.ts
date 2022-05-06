@@ -33,7 +33,7 @@ description:new FormControl(''),
       this.ticket=new Complaints();
     this.ticket.title=this.addComplaint.get('title')?.value;
     this.ticket.description=this.addComplaint.get('description')?.value;
-    this.ticket.status="Raised";
+    this.ticket.status="Escalated";
     this.activeModal.close();
     this.add();
    
