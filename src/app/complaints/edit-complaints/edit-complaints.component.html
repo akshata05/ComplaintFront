@@ -8,15 +8,33 @@
           <form>
             <div class="mb-3">
               <label for="recipient-name" class="col-form-label">Title:</label>
-              <input type="text" name="title" class="form-control" id="recipient-name" [value]="complaints.title" [(ngModel)]="complaints.title" >
+              <input type="text" disabled name="title" class="form-control" id="recipient-name" [value]="complaints.title" [(ngModel)]="complaints.title" >
             </div>
             <div class="mb-3">
-              <label for="message-text" class="col-form-label">Description:</label>
-              <textarea class="form-control" [(ngModel)]="complaints.description" id="message-text" name="description"[value]="complaints.description" ></textarea>
+              <label for="message-text" class="col-form-label" >Description:</label>
+              <textarea disabled class="form-control" [(ngModel)]="complaints.description" id="message-text" name="description"[value]="complaints.description" ></textarea>
             </div>
-            <div class="mb-3">
+            <div class="mb-3" *ngIf="currentUser.role==role.Engineer">
+              <label for="resolution" class="col-form-label">Resolution:</label>
+              <textarea class="form-control" [(ngModel)]="complaints.complainStatus.resolution" id="resolution" name="resolution"[value]="complaints.complainStatus.resolution" ></textarea>
+            </div>
+            <div class="mb-3" *ngIf="currentUser.role==role.User && complaints.complainStatus.status=='Resolved'">
+              <label for="feedback" class="col-form-label">Feedback:</label>
+              <textarea class="form-control" [(ngModel)]="complaints.complainStatus.feedback" id="feedback" name="feedback"[value]="complaints.complainStatus.feedback" ></textarea>
+            </div>
+            <div class="mb-3" *ngIf="currentUser.role==role.Manager" >
+              <label for="engineer1" class="col-form-label">Assign Engineer:</label>
+              <div>
+
+                <select name="engineer1" id="engineer1" ngModel class="dropdown" [(ngModel)]="engineer" #engineer1="ngModel" required >
+                  <option *ngFor="let user of users " [ngValue]="user" >{{user.username}}</option>
+                </select>
+              </div>
+        
+            </div>
+            <div class="mb-3" >
                 <label for="status" class="col-form-label">Status:</label>
-                <input [(ngModel)]="complaints.status" type="text" class="form-control" id="status"  name="status"[value]="complaints.status" disabled>
+                <input [(ngModel)]="complaints.complainStatus.status" type="text" class="form-control" id="status"  name="status"[value]="complaints.complainStatus.status" disabled>
               </div>
           </form>
         </div>

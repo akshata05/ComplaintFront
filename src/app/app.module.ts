@@ -24,13 +24,25 @@ import { EscalatedComplainComponent } from './Complains/escalated-complain/escal
 import { ResolvedComplainComponent } from './Complains/resolved-complain/resolved-complain.component';
 import { Route, RouterModule, Routes } from '@angular/router';
 import { NotfoundComponent } from './notfound/notfound/notfound.component';
+import { LoginComponent } from './login/login/login.component';
+import { RegisterComponent } from './register/register/register.component';
+import { AuthGuard } from './guards/auth.guard';
+import { Role } from './Model/role.enum';
+import { UnauthorizedComponent } from './unauthorized/unauthorized/unauthorized.component';
+import { authInterceptorProviders } from './interceptor/auth.interceptor';
+import { CompletedComponent } from './Complains/completed/completed.component';
 
 const routes:Routes=[
 {path:"new",component:NewComplainComponent},
 {path:"escalated",component:EscalatedComplainComponent},
+{path:"customer",component:CustomerComponent},
 {path:"resolved",component:ResolvedComplainComponent},
 {path:"404",component:NotfoundComponent},
-{path:"",redirectTo:"new",pathMatch:"full"}
+{path:"register",component:RegisterComponent},
+{path:"401",component:UnauthorizedComponent},
+{path:"login",component:LoginComponent},
+{path:"completed",component:CompletedComponent},
+{path:"",redirectTo:"login",pathMatch:"full"}
 ]
 @NgModule({
   declarations: [
@@ -47,7 +59,11 @@ const routes:Routes=[
     NewComplainComponent,
     EscalatedComplainComponent,
     ResolvedComplainComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    LoginComponent,
+    RegisterComponent,
+    UnauthorizedComponent,
+    CompletedComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +80,7 @@ MatCommonModule,
     RouterModule.forRoot(routes)
    
   ],
-  providers: [ComplaintsServiceService, NgbActiveModal,MatDialogModule],
+  providers: [authInterceptorProviders,ComplaintsServiceService, NgbActiveModal,MatDialogModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

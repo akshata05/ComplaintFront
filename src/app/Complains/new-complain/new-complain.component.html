@@ -1,6 +1,8 @@
-
+<ng-container>
   <div>
+    <span *ngIf="currentUser.role===role.User" >
 <button class="btn btn-primary active" appShortKeys  [appKeys]="AddNew" (click)="AddNew()" id="createTicket" >Create Ticket</button>
+    </span>
 <table class="table-bordered" >
     <thead><tr class="table-success" >
         <th>Ticket Id</th>
@@ -14,16 +16,13 @@
     <tbody>
         <tr *ngFor="let complaint of complaints| paginate: { itemsPerPage: 10, currentPage: page} ;let i=index ">
        
-            <td>{{complaint.id}}</td>
+            <td>{{complaint.ticketId}}</td>
             <td>{{complaint.title}}</td>
             <td>{{complaint.description}}</td>
-            <td>{{complaint.status}}</td>
+            <td>{{complaint.complainStatus.status}}</td>
               <td>
-               <span><i class="fas fa-edit fa-lg"style="color:#4C3F91;"  [id]="complaint.id" (click)="openModal($event)" ></i>
+               <span *ngIf="currentUser.role==role.Manager"><i class="fas fa-edit fa-lg"style="color:#4C3F91;"  [id]="complaint.ticketId" (click)="openModal($event)" ></i>
                </span>
-               <span><button > <img alt="delete ticket" src="assets/svg/delete.svg" [id]="complaint.id" (click)="openDialog($event)"  /></button></span>
-                
-           
             </td>
     
         </tr>

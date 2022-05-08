@@ -5,21 +5,20 @@
         <th>Title</th>
         <th>Description</th>
         <th>Status</th>
-
         <th>Actions</th>
     </tr></thead>
     
     <tbody>
         <tr *ngFor="let complaint of complaints| paginate: { itemsPerPage: 10, currentPage: page} ;let i=index ">
        
-            <td>{{complaint.id}}</td>
+            <td>{{complaint.ticketId}}</td>
             <td>{{complaint.title}}</td>
             <td>{{complaint.description}}</td>
-            <td>{{complaint.status}}</td>
-              <td>
-               <span><i class="fas fa-edit fa-lg"style="color:#4C3F91;"  [id]="complaint.id" (click)="openModal($event)" ></i>
-               </span>         
-            </td>
+            <td>{{complaint.complainStatus.status}}</td>
+            <td>
+                <span *ngIf="currentUser.role==role.Engineer"><i class="fas fa-edit fa-lg"style="color:#4C3F91;"  [id]="complaint.ticketId" (click)="openModal($event)" ></i>
+                </span>
+             </td>
     
         </tr>
 

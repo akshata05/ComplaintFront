@@ -4,6 +4,9 @@ import { Complaints } from 'src/app/common/complaints';
 import { AddComplaintsComponent } from 'src/app/complaints/add-complaints/add-complaints.component';
 import { EditComplaintsComponent } from 'src/app/complaints/edit-complaints/edit-complaints.component';
 import { DeleteTicketComponent } from 'src/app/delete-ticket/delete-ticket.component';
+import { Role } from 'src/app/Model/role.enum';
+import { User } from 'src/app/Model/user.model';
+import { AuthenicationService } from 'src/app/service/authenication.service';
 import { ComplaintsServiceService } from 'src/app/service/complaints-service.service';
 
 @Component({
@@ -12,10 +15,11 @@ import { ComplaintsServiceService } from 'src/app/service/complaints-service.ser
   styleUrls: ['./resolved-complain.component.css']
 })
 export class ResolvedComplainComponent implements OnInit {
-
+role=Role;
   complaints!:Complaints[];
   singleComplaints!:Complaints;
   addComplaints!:Complaints;
+  currentUser:User=new User();
   isadded=false;
   showModal=false;
   interval: any;
@@ -25,8 +29,11 @@ export class ResolvedComplainComponent implements OnInit {
 @Input() maxSize!: number;
 @Output() pageChange!: EventEmitter<number>;
 @Output() pageBoundsCorrection!: EventEmitter<number>;
-  constructor(private complaintService:ComplaintsServiceService,public modalService: NgbModal) {
+  constructor(private complaintService:ComplaintsServiceService,public modalService: NgbModal,private authenticationService:AuthenicationService) {
     this.singleComplaints=new Complaints();
+    this.authenticationService.currentUser.subscribe(data=>{
+      this.currentUser=data;
+    });
      }
 
   ngOnInit(): void {
@@ -36,7 +43,15 @@ export class ResolvedComplainComponent implements OnInit {
   
  public getList():void{
   
- this.complaintService.GetComplainByStatus("Resolved").subscribe(data=>{this.complaints=data;console.log(this.complaints)});
+  if(this.currentUser.role===Role.User)
+  {
+    this.complaintService.GetComplainByStatus("Resolved",this.currentUser.id).subscribe(data=>{this.complaints=data;console.log(this.complaints)});
+  }
+  else if(this.currentUser.role==Role.Engineer){
+    this.complaintService. GetComplainByStatusForEngineers("Resolved",this.currentUser.id).subscribe(data=>{this.complaints=data;console.log(this.complaints)});
+  }
+  
+   else{ this.complaintService.GetComplains("Resolved").subscribe(data=>{this.complaints=data;console.log(this.complaints)});}  
 
  }
 

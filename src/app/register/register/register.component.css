@@ -1,0 +1,15 @@
+.custom-card{
+    width: 350px;
+    max-width: 100%;
+    background-color: #eee!important;
+}
+.user-icon{
+    text-align: center;
+    font-size: 100px;
+    color: #2155CD;
+}
+.dropdown{
+    border-color: aquamarine;
+    width:100%;
+    padding: 2%;
+}

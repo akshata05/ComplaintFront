@@ -1,5 +1,5 @@
 <ul class="nav nav-tabs">
-  <li class="nav-item">
+  <li class="nav-item" *ngIf="currentUser.role!=role.Engineer">
     <a class="nav-link"  aria-current="page" routerLink="/new" routerLinkActive="active">New</a>
   </li>
   <li class="nav-item">
@@ -8,5 +8,7 @@
   <li class="nav-item">
     <a class="nav-link"  routerLink="/resolved" routerLinkActive="active">Resolved</a>
   </li>
- 
+  <li class="nav-item">
+    <a class="nav-link"  routerLink="/completed" routerLinkActive="active">Completed</a>
+  </li>
 </ul>
