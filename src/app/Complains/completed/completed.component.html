@@ -1,0 +1,35 @@
+
+<table class="table-bordered" >
+    <thead><tr class="table-success" >
+        <th>Ticket Id</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Feedback</th>
+        <th>Resolution</th>
+        <th>Status</th>
+
+    </tr></thead>
+    
+    <tbody>
+        <tr *ngFor="let complaint of complaints| paginate: { itemsPerPage: 10, currentPage: page} ;let i=index ">
+       
+            <td>{{complaint.ticketId}}</td>
+            <td>{{complaint.title}}</td>
+            <td>{{complaint.description}}</td>
+            <td>{{complaint.complainStatus.feedback}}</td>
+            <td>{{complaint.complainStatus.resolution}}</td>
+            <td>{{complaint.complainStatus.status}}</td>
+             
+    
+        </tr>
+
+</tbody>
+    
+</table>
+
+
+<pagination-controls (pageChange)="page = $event">
+</pagination-controls>
+
+
+

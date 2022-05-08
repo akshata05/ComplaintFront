@@ -1,2 +1,19 @@
+<div class="navbar navbar-expand navbar-dark bg-dark">
 
-<app-complaints></app-complaints>
+    <a href="" class="navbar-brand ms-1">ComplainBox</a>
+    
+   
+<div class="navbar-nav ml-auto" *ngIf="!currentUser?.id">
+    <div class="nav-item"><a routerLink="/login" class="nav-link">Sign In</a></div>
+<div class="nav-item"><a routerLink="/register" class="nav-link">Sign Up</a></div>
+</div>
+<div class="navbar-nav ml-auto" *ngIf="currentUser?.id">
+   
+    <div class="nav-item"><span routerLink="/login" class="nav-link">{{currentUser.username}} | {{currentUser.role}}</span></div>
+<div class="nav-item"><a (click)="logOut()" class="nav-link">Logout</a></div>
+</div>
+</div>
+<div *ngIf="currentUser?.id">
+<app-home></app-home>
+</div>
+<router-outlet></router-outlet>

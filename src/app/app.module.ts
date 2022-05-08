@@ -19,7 +19,31 @@ import { DeleteTicketComponent } from './delete-ticket/delete-ticket.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCommonModule } from '@angular/material/core';
 import { ShortKeysDirective } from './short-keys.directive';
+import { NewComplainComponent } from './Complains/new-complain/new-complain.component';
+import { EscalatedComplainComponent } from './Complains/escalated-complain/escalated-complain.component';
+import { ResolvedComplainComponent } from './Complains/resolved-complain/resolved-complain.component';
+import { Route, RouterModule, Routes } from '@angular/router';
+import { NotfoundComponent } from './notfound/notfound/notfound.component';
+import { LoginComponent } from './login/login/login.component';
+import { RegisterComponent } from './register/register/register.component';
+import { AuthGuard } from './guards/auth.guard';
+import { Role } from './Model/role.enum';
+import { UnauthorizedComponent } from './unauthorized/unauthorized/unauthorized.component';
+import { authInterceptorProviders } from './interceptor/auth.interceptor';
+import { CompletedComponent } from './Complains/completed/completed.component';
 
+const routes:Routes=[
+{path:"new",component:NewComplainComponent},
+{path:"escalated",component:EscalatedComplainComponent},
+{path:"customer",component:CustomerComponent},
+{path:"resolved",component:ResolvedComplainComponent},
+{path:"404",component:NotfoundComponent},
+{path:"register",component:RegisterComponent},
+{path:"401",component:UnauthorizedComponent},
+{path:"login",component:LoginComponent},
+{path:"completed",component:CompletedComponent},
+{path:"",redirectTo:"login",pathMatch:"full"}
+]
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +55,15 @@ import { ShortKeysDirective } from './short-keys.directive';
     EditComplaintsComponent,
     AddComplaintsComponent,
     DeleteTicketComponent,
-    ShortKeysDirective
+    ShortKeysDirective,
+    NewComplainComponent,
+    EscalatedComplainComponent,
+    ResolvedComplainComponent,
+    NotfoundComponent,
+    LoginComponent,
+    RegisterComponent,
+    UnauthorizedComponent,
+    CompletedComponent
   ],
   imports: [
     BrowserModule,
@@ -44,10 +76,11 @@ import { ShortKeysDirective } from './short-keys.directive';
     MatDialogModule,
 MatCommonModule,
 
-    NgxPaginationModule
+    NgxPaginationModule,
+    RouterModule.forRoot(routes)
    
   ],
-  providers: [ComplaintsServiceService, NgbActiveModal,MatDialogModule],
+  providers: [authInterceptorProviders,ComplaintsServiceService, NgbActiveModal,MatDialogModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

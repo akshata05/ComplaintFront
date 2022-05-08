@@ -1,0 +1,39 @@
+table{
+    margin-left:auto;
+    margin-right: auto;
+    height:50%;
+    width: 50%;
+ }
+ tr{
+ height:10%;
+ }
+ td{
+ word-wrap: break-word;
+ max-width: 1px;
+ -webkit-hyphens: auto; /* iOS 4.2+ */
+ -moz-hyphens: auto; /* Firefox 5+ */
+ -ms-hyphens: auto; /* IE 10+ */
+ hyphens: auto;
+ }
+ text{
+    justify-content: left;
+ }
+ 
+ button {
+     background: none;
+     
+     border: none;
+ 
+     font: inherit;
+     cursor: pointer;
+     
+ }
+ pagination-controls{
+     text-align: center;
+  
+ }
+button{
+ margin-left: 20%;
+    margin-bottom: 5%;
+    margin-top: 5%;
+ }

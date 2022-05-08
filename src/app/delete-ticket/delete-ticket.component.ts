@@ -30,6 +30,6 @@ DeleteComplain(){
    
     });
   
- // this.load.stoploading$.subscribe(response=>{if(response==true){this.stop=false;}});
+
 }
 }

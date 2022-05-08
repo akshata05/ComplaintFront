@@ -1,8 +1,9 @@
-export class Complaints {
- id!: number;
+import { ComplaintStatus } from "./complaintsStatus";
 
- title!:string;
+export class Complaints {
+ ticketId!: number;
+title!:string;
  description!:string;
- status!:string;
+ complainStatus!:ComplaintStatus;
  
 }

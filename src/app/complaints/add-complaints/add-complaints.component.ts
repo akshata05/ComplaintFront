@@ -2,6 +2,8 @@ import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 import {  FormGroup ,FormControl} from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Complaints } from 'src/app/common/complaints';
+import { User } from 'src/app/Model/user.model';
+import { AuthenicationService } from 'src/app/service/authenication.service';
 import { ComplaintsServiceService } from 'src/app/service/complaints-service.service';
 import { ComplaintsComponent } from '../complaints.component';
 
@@ -16,14 +18,23 @@ export class AddComplaintsComponent implements OnInit  {
 
 ticket!:Complaints;
 response!:Complaints;
-
+currentUser:User=new User();
 
 @Output() complain=new EventEmitter<Complaints>();
+@Output() statusOk=new EventEmitter<any>();
+oksataus:any;
 addComplaint=new FormGroup({
 title:new FormControl(''),
+
 description:new FormControl(''),
 });
-  constructor(public activeModal: NgbActiveModal,private complaintService:ComplaintsServiceService) { }
+  constructor(public activeModal: NgbActiveModal,private complaintService:ComplaintsServiceService,private authenticationService:AuthenicationService) { 
+    this.authenticationService.currentUser.subscribe(data=>{
+      this.currentUser=data;  
+    
+
+    });
+  }
 
   ngOnInit(): void {
     
@@ -33,7 +44,6 @@ description:new FormControl(''),
       this.ticket=new Complaints();
     this.ticket.title=this.addComplaint.get('title')?.value;
     this.ticket.description=this.addComplaint.get('description')?.value;
-    this.ticket.status="Raised";
     this.activeModal.close();
     this.add();
    
@@ -43,7 +53,7 @@ description:new FormControl(''),
     }
   }
   add(){
-    this.complaintService.addComplaint(this.ticket).subscribe(data=>{this.response=data;console.log(this.response.id);this.complain.emit(this.response);});
+    this.complaintService.addComplaint(this.ticket,this.currentUser.id).subscribe(data=>{this.oksataus=data;this.statusOk.emit(this.oksataus);});
     
   }
  
